@@ -1,0 +1,1 @@
+Hier werden die DB Schema Scripts für minKis Projekt verwaltet

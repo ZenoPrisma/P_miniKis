@@ -1,0 +1,13 @@
+Juli 15, 2024 1:25:47 PM minKis.LogManager logInfo
+INFORMATION: Eine Verbindung zur Datenbank wurde Hergestellt.
+Juli 15, 2024 1:26:13 PM minKis.LogManager logError
+SCHWERWIEGEND: Verbindung zur Datenbank fehlgeschlagen!
+Juli 15, 2024 1:26:13 PM minKis.LogManager logError
+SCHWERWIEGEND: ORA-01017: Benutzername/Kennwort ungültig; Anmeldung abgelehnt
+
+Juli 15, 2024 1:26:48 PM minKis.LogManager logInfo
+INFORMATION: Eine Verbindung zur Datenbank wurde Hergestellt.
+Juli 15, 2024 1:48:16 PM minKis.LogManager logInfo
+INFORMATION: Eine Verbindung zur Datenbank wurde Hergestellt.
+Juli 15, 2024 1:48:19 PM minKis.LogManager logInfo
+INFORMATION: Eine Verbindung zur Datenbank wurde geschlossen.
