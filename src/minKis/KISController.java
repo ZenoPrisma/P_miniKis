@@ -21,7 +21,7 @@ public class KISController {
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                Patient patient = new Patient();
+                Patient patient = (Patient) PersonFactory.createPerson(PersonFactory.PersonType.PATIENT);
                 patient.setID(rs.getInt("ID"));
                 patient.setName(rs.getString("Name"));
                 patient.setVorname(rs.getString("Vorname"));
@@ -88,7 +88,7 @@ public class KISController {
              ResultSet rs = stmt.executeQuery()) {
         	
             while (rs.next()) {
-                Employees mitarbeiter = new Employees();
+                Employees mitarbeiter = (Employees) PersonFactory.createPerson(PersonFactory.PersonType.EMPLOYEE);
                 mitarbeiter.setID(rs.getInt("ID"));
                 mitarbeiter.setName(rs.getString("Name"));
                 mitarbeiter.setVorname(rs.getString("Vorname"));
@@ -110,7 +110,7 @@ public class KISController {
              ResultSet rs = stmt.executeQuery()) { 
            	
                while (rs.next()) {
-                   IPerson mitarbeiter = new Employees();
+                   IPerson mitarbeiter = PersonFactory.createPerson(PersonFactory.PersonType.EMPLOYEE);
                    mitarbeiter.setID(rs.getInt("ID"));
                    mitarbeiter.setName(rs.getString("Name"));
                    mitarbeiter.setVorname(rs.getString("Vorname"));
@@ -151,7 +151,7 @@ public class KISController {
         }
         java.sql.Date Geburtsdatum = dateHolder[0];
 
-        Patient newPatient = new Patient();
+        Patient newPatient = (Patient) PersonFactory.createPerson(PersonFactory.PersonType.PATIENT);
         newPatient.setName(Name);
         newPatient.setVorname(Vorname);
         newPatient.setGeburtsdatum(Geburtsdatum);
@@ -308,7 +308,7 @@ public class KISController {
 			return null;
 		} 
 
-        Employees newMitarbeiter = new Employees();
+        Employees newMitarbeiter = (Employees) PersonFactory.createPerson(PersonFactory.PersonType.EMPLOYEE);
         newMitarbeiter.setName(Name);
         newMitarbeiter.setVorname(Vorname);
         newMitarbeiter.setGeburtsdatum(Geburtsdatum);
@@ -334,7 +334,7 @@ public class KISController {
             
             if (rowsAffected > 0) {
                 System.out.println("Patient erfolgreich eingefuegt!");
-                LogManager.logInfo("Ein Patient wurde eingefuegt.");
+                LogManager.getInstance().logInfo("Ein Patient wurde eingefuegt.");
                 //Abrufen des letzten generierten Werts aus der Sequence
                 try (Statement sequenceStmt = conn.createStatement()) {
                     ResultSet resultSet = sequenceStmt.executeQuery("SELECT seq_patient.CURRVAL FROM dual");
@@ -344,7 +344,7 @@ public class KISController {
                 }
             } else {
                 System.out.println("Fehler beim Einfuegen des Patienten.");
-                LogManager.logError("Fehler beim Einfuegen eines Patienten.", null);
+                LogManager.getInstance().logError("Fehler beim Einfuegen eines Patienten.", null);
             }
             return generatedPatientID;
         }
@@ -365,7 +365,7 @@ public class KISController {
             
             if (rowsAffected > 0) {
                 System.out.println("Adresse erfolgreich eingefuegt!");
-                LogManager.logInfo("Eine Adresse wurde hinzugefuegt.");
+                LogManager.getInstance().logInfo("Eine Adresse wurde hinzugefuegt.");
                 //Abrufen des letzten generierten Werts aus der Sequence
                 try (Statement sequenceStmt = conn.createStatement()) {
                     ResultSet resultSet = sequenceStmt.executeQuery("SELECT seq_adresse.CURRVAL FROM dual");
@@ -375,7 +375,7 @@ public class KISController {
                 }
             } else {
                 System.out.println("Fehler beim Einfuegen der Adresse.");
-                LogManager.logError("Fehler beim Einfuegen der Adresse.", null);
+                LogManager.getInstance().logError("Fehler beim Einfuegen der Adresse.", null);
             }
             return generatedAdressID;
         }
@@ -414,7 +414,7 @@ public class KISController {
                 }
             } else {
                 System.out.println("Fehler beim Einfuegen des Mitarbeiters.");
-                LogManager.logError("Fehler beim Einfuegen des Mitarbeiters.", null);
+                LogManager.getInstance().logError("Fehler beim Einfuegen des Mitarbeiters.", null);
             }
             return generatedMitarbeiterID;
         }
@@ -783,7 +783,7 @@ public class KISController {
             return krankenhaeuser;
         } catch (SQLException e) { 
             e.printStackTrace(); 
-            LogManager.logError("Fehler beim Abrufen der Krankenhaeuser", e);
+            LogManager.getInstance().logError("Fehler beim Abrufen der Krankenhaeuser", e);
             throw new RuntimeException("Fehler beim Abrufen der Krankenhaeuser", e);           
         }
     }
@@ -800,7 +800,7 @@ public class KISController {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            LogManager.logError("Fehler beim Laden der Standorte fuer Krankenhaus", e);
+            LogManager.getInstance().logError("Fehler beim Laden der Standorte fuer Krankenhaus", e);
             throw new RuntimeException("Fehler beim Laden der Standorte fuer Krankenhaus " + krankenhaus.getId(), e);
         }
     }
@@ -817,7 +817,7 @@ public class KISController {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            LogManager.logError("Fehler beim Laden der Stationen fuer Standort", e);
+            LogManager.getInstance().logError("Fehler beim Laden der Stationen fuer Standort", e);
             throw new RuntimeException("Fehler beim Laden der Stationen fuer Standort " + standort.getId(), e);
         }
     }
@@ -834,7 +834,7 @@ public class KISController {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            LogManager.logError("Fehler beim Laden der Abteilungen fuer Station", e);
+            LogManager.getInstance().logError("Fehler beim Laden der Abteilungen fuer Station", e);
             throw new RuntimeException("Fehler beim Laden der Abteilungen fuer Station " + station.getId(), e);
         }
     }
@@ -851,7 +851,7 @@ public class KISController {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            LogManager.logError("Fehler beim Laden der Zimmer fuer Abteilungen", e);
+            LogManager.getInstance().logError("Fehler beim Laden der Zimmer fuer Abteilungen", e);
             throw new RuntimeException("Fehler beim Laden der Zimmer fuer Abteilungen " + abteilung.getId(), e);
         }
     }
@@ -868,7 +868,7 @@ public class KISController {
             } 
         } catch (SQLException e) {
             e.printStackTrace();
-            LogManager.logError("Fehler beim Laden der Betten fuer Zimmer", e);
+            LogManager.getInstance().logError("Fehler beim Laden der Betten fuer Zimmer", e);
             throw new RuntimeException("Fehler beim Laden der Betten fuer Zimmer " + zimmer.getId(), e);
         }
     }

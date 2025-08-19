@@ -18,7 +18,7 @@ public class PatientenVerwaltung {
 
         } catch (SQLException e) {
         	System.out.println("Verbindung zur Datenbank konnte nicht hergestellt werden: " + e.getMessage());
-            LogManager.logError("Verbindung zur Datenbank fehlgeschlagen!", e);
+            LogManager.getInstance().logError("Verbindung zur Datenbank fehlgeschlagen!", e);
             return;
         }
     }
@@ -29,7 +29,7 @@ public class PatientenVerwaltung {
         new KISController(conn);
         System.out.println("Verbunden!");
         System.out.println("Willkommen zur Patientenverwaltung!");
-        LogManager.logInfo("Eine Verbindung zur Datenbank wurde Hergestellt.");    
+        LogManager.getInstance().logInfo("Eine Verbindung zur Datenbank wurde Hergestellt.");
     }
 
     public void startPatientenverwaltung() {
@@ -58,7 +58,7 @@ public class PatientenVerwaltung {
                 
                 if (choice == 123) {
                     System.out.println("Patientenverwaltung wird heruntergefahren...");
-                    LogManager.logInfo("Eine Verbindung zur Datenbank wurde geschlossen.");
+                    LogManager.getInstance().logInfo("Eine Verbindung zur Datenbank wurde geschlossen.");
                     break;
                 } 
 
@@ -115,7 +115,7 @@ public class PatientenVerwaltung {
             }
         } catch (SQLException e) {
         	System.out.println("Ein Datenbankfehler ist aufgetreten: " + e.getMessage());
-            LogManager.logError("!Datenbank Error!", e);
+            LogManager.getInstance().logError("!Datenbank Error!", e);
 		} finally {
             sc.close();
         }
