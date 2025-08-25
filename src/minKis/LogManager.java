@@ -7,7 +7,7 @@ import java.util.logging.SimpleFormatter;
 
 public class LogManager {
     
-    private static final String LOG_FILE_PATH = "E:\\Git\\EDUCATION.DEV\\miniKis\\logs"; // Pfad anpassen
+    private static final String LOG_FILE_PATH = "E:\\Training\\Java\\miniKis\\logs"; // Pfad anpassen
     
     private static Logger logger;
 
